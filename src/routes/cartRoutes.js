@@ -4,6 +4,6 @@ const  verifyToken = require('../middlewares/verifyToken');
 
 const router = Router();
 
- router.post('/catt/:inventoryId', verifyToken, cartController);
+ router.post('/cart/:inventoryId', verifyToken, cartController.createInventory);
 
 module.exports = router;

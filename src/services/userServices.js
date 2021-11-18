@@ -50,7 +50,7 @@ class userService {
   static async editUser(userId, userData) {
     try {
       const userExist = await userDao.findById(userId);
-      if (userExist) {
+      if (!userExist)  return 'Not an authenticated user';
         const user = await new userEntity(userData).validateEdit();
         if (user.details) return { error: user.details[0].message };
   
@@ -59,15 +59,8 @@ class userService {
         if ( emailExist !== null && emailExist.email.length > 0 && emailExist.id !== userId) throw new Error("user with this email already exist");
   
         const editedUser = await userDao.update(userId, userData);
-        if (editedUser) {
         return { message: "Profile updated successfully", editedUser };
-        } else {
-          return { message: "Not updated" };
-        }
         
-      } else {
-        return 'Not an authenticated user';
-      }
     } catch (error) {
       throw new Error(error.message);
     }

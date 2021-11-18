@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 //Database Connection
 // local connection = process.env.DATABASE_URL
-mongoose.connect('mongodb+srv://root:hacker1993@cluster0.a44xf.mongodb.net/inventoryAPP?retryWrites=true&w=majority', {
+// 'mongodb+srv://root:hacker1993@cluster0.a44xf.mongodb.net/inventoryAPP?retryWrites=true&w=majority'
+mongoose.connect( process.env.DATABASE_URL , {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
