@@ -1,0 +1,22 @@
+{
+  "name": "inventoryAPP",
+  "version": "1.0.0",
+  "description": "inventory management application",
+  "main": "server.js",
+  "author": "maruf",
+  "license": "MIT",
+  "scripts": {
+    "seed": "node src/seeds/userSeed.js",
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.13",
+    "mongoose-seed": "^0.6.0"
+  }
+}
