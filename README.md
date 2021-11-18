@@ -94,3 +94,5 @@ API is deployed at [https://inventory-app-v1.herokuapp.com/](https://inventory-a
 * After installing as shown above
 * Navigate to [localhost:8080](http://localhost:8080/api) in
   [Postman](https://getpostman.com/) to access the application
+
+* admin login details ( {email: favour@gmail.com, password: admin} )
