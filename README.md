@@ -46,7 +46,7 @@ API is deployed at [https://inventory-app-v1.herokuapp.com/](https://inventory-a
 
 <tr><th>HTTP VERB</th><th>ENDPOINT</th><th>FUNCTIONALITY</th></tr>
 
-<tr><td>POST</td> <td>api/register</td> <td>User registration and enabled by default</td></tr>
+<tr><td>POST</td> <td>api/register</td> <td>User registers and enabled by default</td></tr>
 
 <tr><td>POST</td> <td>api/login</td> <td>User login</td></tr>
 
