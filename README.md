@@ -46,9 +46,9 @@ API is deployed at [https://inventory-app-v1.herokuapp.com/](https://inventory-a
 
 <tr><th>HTTP VERB</th><th>ENDPOINT</th><th>FUNCTIONALITY</th></tr>
 
-<tr><td>POST</td> <td>api/register</td> <td>Register a User</td></tr>
+<tr><td>POST</td> <td>api/register</td> <td>User registration and enabled by default</td></tr>
 
-<tr><td>POST</td> <td>api/login</td> <td>Login a User</td></tr>
+<tr><td>POST</td> <td>api/login</td> <td>User login</td></tr>
 
 <tr><td>GET</td> <td>api/users</td> <td>Get All Users</td></tr>
 
@@ -56,19 +56,19 @@ API is deployed at [https://inventory-app-v1.herokuapp.com/](https://inventory-a
 
 <tr><td>PATCH</td> <td>api/editprofile</td> <td>User update profile</td></tr>
 
-<tr><td>PATCH</td> <td>api/disableuser/:userId</td> <td>Admin disable a user</td></tr>
+<tr><td>PATCH</td> <td>api/disableuser/:userId</td> <td>Only admin can  disable a user</td></tr>
 
-<tr><td>PATCH</td> <td>api/enableuser/:userId</td> <td>Admin disable a user</td></tr>
+<tr><td>PATCH</td> <td>api/enableuser/:userId</td> <td>Only admin can  enable a user</td></tr>
 
-<tr><td>PATCH</td> <td>api/users/:userId</td> <td>Admin delete a user</td></tr>
+<tr><td>PATCH</td> <td>api/users/:userId</td> <td>Only admin can delete a user</td></tr>
 
-<tr><td>POST</td> <td>api/inventory/</td> <td>Admin create an inventory</td></tr>
+<tr><td>POST</td> <td>api/inventory/</td> <td>Only admin can create an inventory</td></tr>
 
-<tr><td>PATCH</td> <td>api/inventory/:inventoryId</td> <td>Admin update an inventory</td></tr>
+<tr><td>PATCH</td> <td>api/inventory/:inventoryId</td> <td>Only admin can update an inventory</td></tr>
 
-<tr><td>DELETE</td> <td>api/inventory/:inventoryId</td> <td>Admin delete an inventory</td></tr>
+<tr><td>DELETE</td> <td>api/inventory/:inventoryId</td> <td>Only admin can delete an inventory</td></tr>
 
-<tr><td>POST</td> <td>/api/cart/:inventoryId</td><td> Add inventory to cart</td></tr>
+<tr><td>POST</td> <td>/api/cart/:inventoryId</td><td> Only enabled userd can add inventory to cart</td></tr>
 
 </table>
 
