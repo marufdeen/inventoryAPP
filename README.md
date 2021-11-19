@@ -56,9 +56,9 @@ API is deployed at [https://inventory-app-v1.herokuapp.com/](https://inventory-a
 
 <tr><td>PATCH</td> <td>api/editprofile</td> <td>User update profile</td></tr>
 
-<tr><td>PATCH</td> <td>api/disableuser</td> <td>Admin disable a user</td></tr>
+<tr><td>PATCH</td> <td>api/disableuser/:userId</td> <td>Admin disable a user</td></tr>
 
-<tr><td>PATCH</td> <td>api/enableuser</td> <td>Admin disable a user</td></tr>
+<tr><td>PATCH</td> <td>api/enableuser/:userId</td> <td>Admin disable a user</td></tr>
 
 <tr><td>PATCH</td> <td>api/users/:userId</td> <td>Admin delete a user</td></tr>
 

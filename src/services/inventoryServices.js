@@ -27,7 +27,7 @@ class inventoryService {
   static async getAllInventories(userId) {
     try {
       const user = await userDao.findById(userId);
-      if (!user) return "Only authenticated users can view inventories";
+      if (!user) throw new Error("Only authenticated users can view inventories");
 
       const allInvetories = await inventoryDao.findAll();
       return allInvetories.length > 0 ? allInvetories : "No inventory found";
@@ -39,7 +39,7 @@ class inventoryService {
   static async getSingleInventory(userId, inventoryId) {
     try {
       const user = await userDao.findById(userId);
-      if (!user) return "Only authenticated users can view inventories";
+      if (!user) throw new Error("Only authenticated users can view inventories");
       const inventory = await inventoryDao.findById(inventoryId);
       // console.log(inventory).length;
       return inventory ? inventory : "No inventory found";
@@ -50,9 +50,9 @@ class inventoryService {
     try {
       const user = await userDao.findById(userId);
       if (user.role !== "admin")
-        return "Sorry, only admin can update an inventory";
+        throw new Error("Sorry, only admin can update an inventory");
       const inventoryExist = await inventoryDao.findById(inventoryId);
-      if (!inventoryExist) return "Sorry, inventory not found";
+      if (!inventoryExist) throw new Error("Sorry, inventory not found");
       // make a new inventory object with inputed data
       const inventory = await new inventoryEntity(inventoryData).validateEdit();
       if (inventory.details) throw new Error(inventory.details[0].message);
@@ -71,9 +71,9 @@ class inventoryService {
     try {
       const user = await userDao.findById(userId);
       if (user.role !== "admin")
-        return "Sorry, only admin can delete an inventory";
+        throw new Error("Sorry, only admin can delete an inventory");
       const inventoryExist = await inventoryDao.findById(inventoryId);
-      if (inventoryExist) return "Inventory not found";
+      if (inventoryExist) throw new Error("Inventory not found");
       await inventoryDao.remove(inventoryId);
       return " Inventory deleted!";
     } catch (error) {

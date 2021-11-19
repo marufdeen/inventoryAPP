@@ -17,7 +17,7 @@ class userService {
       const userCreated = await userDao.create({
         fullName: user.getfullName(),
         email: user.getEmail(),
-        password: user.getPassword()
+        password: user.getPassword(),
       });
       // if user failed to create, throw error
       if (!userCreated) throw new Error("User not Created");
@@ -50,51 +50,50 @@ class userService {
   static async editUser(userId, userData) {
     try {
       const userExist = await userDao.findById(userId);
-      if (!userExist)  return 'Not an authenticated user';
-        const user = await new userEntity(userData).validateEdit();
-        if (user.details) return { error: user.details[0].message };
-  
-        const emailExist = await userDao.findByEmail(user.getEmail()); // check if the email exist
-  
-        if ( emailExist !== null && emailExist.email.length > 0 && emailExist.id !== userId) throw new Error("user with this email already exist");
-  
-        const editedUser = await userDao.update(userId, userData);
-        return { message: "Profile updated successfully", editedUser };
-        
+      if (!userExist) throw new Error("Not an authenticated user");
+
+      const user = await new userEntity(userData).validateEdit();
+      if (user.details) return { error: user.details[0].message };
+
+      const emailExist = await userDao.findByEmail(user.getEmail()); // check if the email exist
+
+      if ( emailExist !== null &&  emailExist.email.length > 0 &&  emailExist.id !== userId  )  throw new Error("user with this email already exist");
+
+      const editedUser = await userDao.update(userId, userData);
+      return { message: "Profile updated successfully", editedUser };
     } catch (error) {
       throw new Error(error.message);
     }
   }
- 
+
   static async setUserStatus(signInId, userId, userData) {
     try {
       const user = await userDao.findById(signInId);
-      if (user.role == 'admin' && signInId !== userId) {
-        const userFound = await userDao.findById(userId);
-        if (userFound) {
-          const userStatus = await userDao.update(userId, userData);
-          return { message: "User", userStatus };
-        } else {
-          return "Sorry, user not found!";
-        }
-      }
-      if (user.role == 'admin' && signInId == userId) {
-        return "Sorry, You can't enable or disable yourself";
-      } else {
-        return "Sorry, only admins can access this page";
-      }
-    } catch (error) {}
+      if (user.role !== "admin")
+        throw new Error("Sorry, only admins can access this page");
+
+      if (user.role == "admin" && signInId == userId)
+        throw new Error("Sorry, You can't enable or disable yourself");
+
+      const userFound = await userDao.findById(userId);
+      if (!userFound) throw new Error("Sorry, user not found!");
+
+      const userStatus = await userDao.update(userId, userData);
+      return { message: "User status changed", userStatus }; 
+
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   static async getAllUsers(signInId) {
     try {
       const user = await userDao.findById(signInId);
-      if (user.role == 'admin') {
-        const usersFound = await userDao.findAll();
-        return { message: "success", usersFound };
-      } else {
-        return "Sorry, only admins can access this page";
-      }
+      if (user.role !== "admin")
+      throw new Error("Sorry, only admins can access this page");
+
+      const usersFound = await userDao.findAll();
+      return { message: "success", usersFound };
     } catch (error) {
       throw new Error(error.message);
     }
@@ -103,16 +102,13 @@ class userService {
   static async getSingleUser(signInId, userId) {
     try {
       const user = await userDao.findById(signInId);
-      if (user.role == 'admin') {
-        const userFound = await userDao.findById(userId);
-        if (userFound) {
-          return { message: "success", userFound };
-        } else {
-          return "Sorry, user not found!";
-        }
-      } else {
-        return "Sorry, only admins can access this page";
-      }
+      if (user.role !== "admin")
+        throw new Error("Sorry, only admins can access this page");
+
+      const userFound = await userDao.findById(userId);
+      if (!userFound) throw new Error("Sorry, user not found!");
+
+      return { message: "success", userFound };
     } catch (error) {
       throw new Error(error.message);
     }
@@ -121,20 +117,17 @@ class userService {
   static async deleteUser(signInId, userId) {
     try {
       const user = await userDao.findById(signInId);
-      if (user.role == 'admin' && signInId !== userId) {
-        const userFound = await userDao.findById(userId);
-        if (userFound) {
-          await userDao.remove(userId);
-          return " User successfully deleted!";
-        } else {
-          return "Sorry, user not found!";
-        }
-      }
-      if (user.role == 'admin' && signInId == userId) {
-        return "Sorry, You can't delete yourself";
-      } else {
-        return "Sorry, only admins can access this page";
-      }
+      if (user.role !== "admin")
+        throw new Error("Sorry, only admins can access this page");
+
+      if (user.role == "admin" && signInId == userId)
+        throw new Error("Sorry, You can't delete yourself");
+
+      const userFound = await userDao.findById(userId);
+      if (!userFound) throw new Error("Sorry, user not found!");
+
+      await userDao.remove(userId);
+      throw new Error(" User successfully deleted!");
     } catch (error) {
       throw new Error(error.message);
     }

@@ -7,17 +7,18 @@ class cartService {
   static async create(userId, inventoryId, cartData) {
     try {
       const user = await userDao.findById(userId);
-      if(!user) return "Sorry, only authenticated users can add inventory to a cart";
+      if(!user) throw new Error("Sorry, only authenticated users can add inventory to a cart");
+      if(user.enabled == false) throw new Error("Sorry, your account has been suspended, kindly contact the admin at favour@gmail.com");
 
       const inventory = await inventoryDao.findById(inventoryId);
-      if(!inventory) return "Sorry, inventory not found";
+      if(!inventory) throw new Error("Sorry, inventory not found");
 
-      if(inventory.quantity == 0 ) return "Sorry, inventory is out of stock";
+      if(inventory.quantity == 0 ) throw new Error("Sorry, inventory is out of stock");
       // make a new inventory object with inputed data
       const cart = await new cartEntity(cartData).execute();
       if (cart.details) throw new Error(cart.details[0].message);
 
-      if(inventory.quantity < cart.getQuantity()) return "Sorry, we don't have to your requested quantity";
+      if(inventory.quantity < cart.getQuantity()) throw new Error("Sorry, we don't have to your requested quantity");
 
       const newCart = await cartDao.create({
         userId: user.id,
