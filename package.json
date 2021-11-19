@@ -5,6 +5,9 @@
   "main": "server.js",
   "author": "maruf",
   "license": "MIT",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "seed": "node src/seeds/userSeed.js",
     "dev": "nodemon server.js",
