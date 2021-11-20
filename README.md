@@ -80,7 +80,7 @@ API is deployed at [https://inventory-app-v1.herokuapp.com/](https://inventory-a
   [InventoryAPP]https://github.com/marufdeen/inventoryAPP)
 * Run `yarn install` or `npm install` to install packages
 * Run `yarn run seed` or `npm run seed` to automatically seed admin into the database
-* Run `yarn start` or `npm start` to start the server
+* Run `yarn run dev` or `npm run dev` to start the server
 * Navigate to [localhost:8080](http://localhost:8080/api) in browser to access the application
 
 ### Testing
