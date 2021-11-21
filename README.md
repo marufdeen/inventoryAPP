@@ -92,7 +92,7 @@ API is deployed at [https://inventory-app-v1.herokuapp.com/](https://inventory-a
  fullName: String,
  email: String,
  password: String,
- cinfirmPassword: String
+ confirmPassword: String
 }
 ```
 * User Login
