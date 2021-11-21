@@ -85,7 +85,7 @@ API is deployed at [https://inventory-app-v1.herokuapp.com/](https://inventory-a
 
 #### Data
 
-* User 
+* User Registration
 
 ```sh
  {
@@ -93,6 +93,14 @@ API is deployed at [https://inventory-app-v1.herokuapp.com/](https://inventory-a
  email: String,
  password: String,
  cinfirmPassword: String
+}
+```
+* User Login
+
+```sh
+ { 
+ email: String,
+ password: String
 }
 ```
 
